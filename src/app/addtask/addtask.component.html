@@ -1,0 +1,40 @@
+<div class="container">
+    <h3>Add Task</h3>
+    
+    <form [formGroup]="addTaskForm">
+      <div class="form-group">
+          
+        <label for="taskTitle">Task Title</label>
+        <mat-form-field>
+              <input formControlName="taskTitle" matInput>
+          </mat-form-field>
+          <p *ngIf="addTaskForm.controls.taskTitle.errors && addTaskForm.controls.taskTitle.touched">This field is required!</p>
+      </div>
+      
+        <div class="form-group">
+          <label for="taskDescription">Task Description</label>
+          <mat-form-field>
+              <input formControlName="taskDescription" matInput>
+          </mat-form-field>
+          <p *ngIf="addTaskForm.controls.taskDescription.errors && addTaskForm.controls.taskDescription.touched">This field is required!</p>
+        </div>
+
+        <div class="form-group">
+            <label for="taskStatus">Task Status</label>
+            <mat-form-field>
+                <mat-select formControlName="taskStatus">
+                    <mat-option *ngFor="let option of taskStatusOptions" [value]="option">
+                      {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <p *ngIf="addTaskForm.controls.taskStatus.errors && addTaskForm.controls.taskStatus.touched">This field is required!</p>
+          </div>
+          <button type="button" mat-raised-button color="accent" (click)="AddTask()">
+              Add
+          </button>
+    </form>
+</div>
+
+
+

@@ -1,0 +1,60 @@
+<div class="row" style="margin: 10px">
+    <button routerLink='/addTask' mat-raised-button color="accent">
+        <mat-icon>add_circle</mat-icon>
+        Add Task
+    </button>
+</div>
+<div class="row">
+<div class="col-lg-4">
+  <div class="statgeBox">
+    <div class="headerlabel">To do</div>
+      <div
+      [attr.data-stage] = "1"
+      cdkDropList
+      #stage1List="cdkDropList"
+      [cdkDropListData]="stage1TasksArray"
+      [cdkDropListConnectedTo]="[stage2List,stage3List]"
+      class="staticEmptyContainer"
+      (cdkDropListDropped)="drop($event)">
+          <div class="taskcard" [cdkDragData]="task" *ngFor="let task of stage1TasksArray" cdkDrag>
+            <app-taskcard [taskCardInfo]="task"></app-taskcard>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="col-lg-4">
+  <div class="statgeBox">
+    <div class="headerlabel">In Progress</div>
+      <div
+      [attr.data-stage] = "2"
+      cdkDropList
+      #stage2List="cdkDropList"
+      [cdkDropListData]="stage2TasksArray"
+      [cdkDropListConnectedTo]="[stage1List,stage3List]"
+      class="staticEmptyContainer"
+      (cdkDropListDropped)="drop($event)">
+          <div class="taskcard" [cdkDragData]="task" *ngFor="let task of stage2TasksArray" cdkDrag>
+              <app-taskcard  [taskCardInfo]="task"></app-taskcard>
+            </div>
+      </div> 
+  </div>
+</div>
+<div class="col-lg-4">
+  <div class="statgeBox">
+      <div class="headerlabel">Done</div>
+      <div
+      [attr.data-stage] = "3"
+      cdkDropList
+      #stage3List="cdkDropList"
+      [cdkDropListData]="stage3TasksArray"
+      [cdkDropListConnectedTo]="[stage1List,stage2List]"
+      class="staticEmptyContainer"
+      (cdkDropListDropped)="drop($event)">
+      <div class="taskcard" [cdkDragData]="task" *ngFor="let task of stage3TasksArray" cdkDrag>
+          <app-taskcard  [taskCardInfo]="task"></app-taskcard>
+        </div>
+        </div>
+  </div>
+</div>
+</div>
