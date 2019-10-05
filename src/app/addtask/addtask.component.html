@@ -30,11 +30,16 @@
             </mat-form-field>
             <p *ngIf="addTaskForm.controls.taskStatus.errors && addTaskForm.controls.taskStatus.touched">This field is required!</p>
           </div>
+          <button *ngIf="paramtaskId; else elseBlock" type="button" mat-raised-button color="accent" (click)="SaveTask()">
+            Save
+        </button>
+        <ng-template #elseBlock>
           <button type="button" mat-raised-button color="accent" (click)="AddTask()">
-              Add
+          Add
           </button>
+        </ng-template>
+        <button type="button" mat-raised-button color="accent" style="margin-left:20px " routerLink="/">
+            Cancel
+        </button>
     </form>
 </div>
-
-
-

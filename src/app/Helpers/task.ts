@@ -1,6 +1,6 @@
 export interface ITaskDetail
 {
-    taskId:string;
+    taskId:number;
     taskTitle: string;
     taskDescription: string;
     taskStatus:number;

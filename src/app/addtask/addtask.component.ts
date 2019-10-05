@@ -17,6 +17,7 @@ export class AddtaskComponent implements OnInit {
 taskStatusOptions: any[] = ['1', '2', '3'];
 newTask = {} as ITaskDetail;
 taskToEdit = {} as ITaskDetail;
+changedTask = {} as ITaskDetail;
 paramtaskId: string;
   constructor(
       private taskService: TaskService
@@ -33,7 +34,7 @@ paramtaskId: string;
     });
     this.paramtaskId = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.paramtaskId) {
-      this.taskToEdit = this.taskService.GetTaskById(this.paramtaskId);
+      this.taskToEdit = this.taskService.GetTaskById(Number(this.paramtaskId));
       this.addTaskForm.patchValue({
         taskTitle : this.taskToEdit.taskTitle,
       taskDescription : this.taskToEdit.taskDescription,
@@ -50,6 +51,14 @@ paramtaskId: string;
     this.taskService.AddTask(this.newTask);
     this.router.navigate(['']);
     console.log(this.taskService.GetTasks());
+  }
+  SaveTask() {
+    this.changedTask.taskTitle = this.addTaskForm.get('taskTitle').value;
+    this.changedTask.taskDescription = this.addTaskForm.get('taskDescription').value;
+    this.changedTask.taskStatus = Number(this.addTaskForm.get('taskStatus').value);
+    this.changedTask.taskId = Number(this.paramtaskId);
+    this.taskService.SaveTask(this.changedTask);
+    this.router.navigate(['']);
   }
 
 }
